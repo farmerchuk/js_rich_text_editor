@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang='en-US'>
+<head>
+  <title>9 - WYSIWYG Editor</title>
+  <meta charset='utf-8'>
+  <style>
+    *, html        { box-sizing: border-box; }
+    body           { background: #000;    color: #eee; font: 18px Helvetica, Arial, sans; }
+    input          { background: #222;    color: #eee; border: #555 solid 1px; caret-color: #15f4ee; }
+    button, select { background: #33b5e5; color: #000; border: #178ab4 solid 1px; }
+    a              { color: #33b5e5; text-decoration: none; }
+    a:hover        { text-decoration: underline; }
+    body {
+      text-align: center;
+      background: #111;
+    }
+    main {
+      text-align: left;
+      background: #000;
+      margin: 30px auto;
+      width: 800px;
+      height: 500px
+    }
+    #controls_E {
+      background: #191919;
+    }
+    button {
+      color: #000;
+      background: #00668d;
+      margin: 10px 5px;
+      font-size: 15px;
+      border-radius: 5px;
+      border: none;
+      padding: 3px 5px;
+    }
+    button:hover {
+      cursor: pointer;
+      color: #eee;
+    }
+    .button.active {
+      background: #33b5e5;
+    }
+    #editor_E {
+      caret-color: #33b5e5;
+      padding: 10px;
+      height: 100%;
+      font-size: 20px;
+    }
+    #editor_E:focus {
+      outline: none;
+    }
+  </style>
+  <script defer src='https://use.fontawesome.com/releases/v5.0.10/js/all.js' integrity='sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+' crossorigin='anonymous'></script>
+</head>
+<body>
+  <h1>Rich Text Editor</h1>
+  <main>
+    <div id='controls_E'>
+      <button id='bold' type='button' label='bold'><i class='fas fa-bold'></i></button>
+      <button id='italic' type='button' ><i class='fas fa-italic'></i></button>
+      <button id='underline' type='button' ><i class='fas fa-underline'></i></button>
+      <button id='strikethrough' type='button' ><i class='fas fa-strikethrough'></i></button>
+      <button id='createLink' type='button' ><i class='fas fa-link'></i></button>
+      <button id='insertUnorderedList' type='button' ><i class='fas fa-list-ul'></i></button>
+      <button id='insertOrderedList' type='button' ><i class='fas fa-list-ol'></i></button>
+      <button id='justifyLeft' type='button' ><i class='fas fa-align-left'></i></button>
+      <button id='justifyRight' type='button' ><i class='fas fa-align-right'></i></button>
+      <button id='justifyCenter' type='button' ><i class='fas fa-align-center'></i></button>
+      <button id='justifyFull' type='button' ><i class='fas fa-align-justify'></i></button>
+    </div>
+    <div id='editor_E' contenteditable='true'></div>
+  </main>
+
+<!--==================================================================================--><script>
+const promptForLink = _ => ''+getSelection() && ''+[prompt('Enter the URL to link to:')];
+document.querySelectorAll('button').forEach(button => {
+  button.onclick = _ => {
+    document.execCommand(button.id, true, button.id == 'createLink' && promptForLink())
+  };
+});
+//=====================================================================================//</script>
+</body>
+</html>
