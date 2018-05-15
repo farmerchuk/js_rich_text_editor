@@ -27,14 +27,13 @@ var richTextEditor = {
   },
 
   editStyle: function(btnId) {
+    var value = null;
+
     if (btnId === 'createLink') {
-      if (this.isSelection()) {
-        var link = prompt('Enter a link:');
-        if (link) document.execCommand(btnId, true, link);
-      }
-    } else {
-      document.execCommand(btnId, true, null);
+      if (this.isSelection()) value = prompt('Enter a link:');
     }
+
+    document.execCommand(btnId, true, value);
   },
 
   isSelection: function() {
